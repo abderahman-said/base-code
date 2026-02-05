@@ -23,29 +23,42 @@ const DemoSection = dynamic(
   { ssr: true }
 );
 
+import { useTranslations } from 'next-intl';
+
 /**
  * Home Page
  * Pure composition - no logic
  * Heavy sections are lazy loaded for better performance
  */
 export default function HomePage() {
+  const t = useTranslations('HomePage');
+  const tCommon = useTranslations('Common');
+
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-black">
+    <div className="min-h-screen  bg-zinc-50 dark:bg-black">
       <Header />
-      <main>
+      <main className='container max-w-5xl mx-auto'>
+        <div className=" py-12 text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-100">
+            {t('title')}
+          </h1>
+          <p className="mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            {t('description')}
+          </p>
+        </div>
         <HeroSection />
         <FeaturesSection />
         <ArchitectureSection />
 
-        <Suspense fallback={<div className="py-24 text-center">Loading...</div>}>
+        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
           <CodeExampleSection />
         </Suspense>
 
-        <Suspense fallback={<div className="py-24 text-center">Loading...</div>}>
+        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
           <StructureSection />
         </Suspense>
 
-        <Suspense fallback={<div className="py-24 text-center">Loading...</div>}>
+        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
           <DemoSection />
         </Suspense>
       </main>

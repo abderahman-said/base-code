@@ -40,7 +40,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
         return (
             <div className={cn('space-y-2', containerClassName)}>
                 {label && (
-                    <Label htmlFor={inputId} className="text-zinc-900 dark:text-zinc-100">
+                    <Label htmlFor={inputId} className="text-zinc-900 dark:text-zinc-100 block pb-2">
                         {label}
                         {required && <span className="text-red-500 ml-1">*</span>}
                     </Label>

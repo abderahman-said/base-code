@@ -8,9 +8,15 @@ import { UserFormProps } from '../types/users.types';
 import { userFormSchema, UserFormValues } from '../types/user-schema';
 import { toast } from 'sonner';
 import { ControlledSelect } from '@/components/ui/select/ControlledSelect';
-
+import { useTranslations } from 'next-intl';
+import { useQueryClient } from '@tanstack/react-query';
+import { usersKeys } from '../keys';
+import { usersService } from '../services/users.service';
 
 export function UserForm({ user, onSubmit, onSuccess, onCancel }: UserFormProps) {
+    const t = useTranslations('Users');
+    const queryClient = useQueryClient();
+
     const form = useForm<UserFormValues>({
         resolver: zodResolver(userFormSchema),
         defaultValues: {
@@ -26,18 +32,33 @@ export function UserForm({ user, onSubmit, onSuccess, onCancel }: UserFormProps)
     const handleSubmit = async (data: UserFormValues) => {
         try {
             console.log('Form data:', data);
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            if (onSubmit) {
-                await onSubmit(data);
+
+            if (isEditing) {
+                // Update implementation would go here
+                if (onSubmit) {
+                    await onSubmit(data);
+                }
+            } else {
+                // For new users, use our simulated createUser service
+                await usersService.createUser({
+                    name: data.name,
+                    email: data.email,
+                    role: data.role as any
+                });
             }
-            toast.success(user ? 'تم تحديث المستخدم بنجاح' : 'تم إضافة المستخدم بنجاح');
+
+            // Invalidate the users query to refresh the list
+            await queryClient.invalidateQueries({ queryKey: usersKeys.all });
+
+            toast.success(user ? t('messages.success_update') : t('messages.success_add'));
+
             if (!user) {
                 form.reset();
             }
             onSuccess?.();
         } catch (error) {
             console.error(error);
-            toast.error('حدث خطأ أثناء حفظ البيانات');
+            toast.error(t('messages.error_save'));
         }
     };
     return (
@@ -46,14 +67,14 @@ export function UserForm({ user, onSubmit, onSuccess, onCancel }: UserFormProps)
                 <ControlledInput
                     control={form.control}
                     name="name"
-                    label="الاسم"
-                    placeholder="أدخل الاسم"
+                    label={t('fields.name')}
+                    placeholder={t('fields.name_placeholder')}
                 />
 
                 <ControlledInput
                     control={form.control}
                     name="email"
-                    label="البريد الإلكتروني"
+                    label={t('fields.email')}
                     placeholder="example@email.com"
                     type="email"
                 />
@@ -61,25 +82,25 @@ export function UserForm({ user, onSubmit, onSuccess, onCancel }: UserFormProps)
                 <ControlledSelect
                     control={form.control}
                     name="role"
-                    label="الدور"
-                    placeholder="اختر الدور"
+                    label={t('fields.role')}
+                    placeholder={t('fields.role_placeholder')}
                     options={[
-                        { value: 'user', label: 'مستخدم' },
-                        { value: 'moderator', label: 'مشرف' },
-                        { value: 'admin', label: 'مدير' },
+                        { value: 'user', label: t('roles.user') },
+                        { value: 'moderator', label: t('roles.moderator') },
+                        { value: 'admin', label: t('roles.admin') },
                     ]}
                 />
 
                 <div className="flex gap-4 pt-4">
                     <Button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'جاري الحفظ...' : isEditing ? 'حفظ التعديلات' : 'إضافة المستخدم'}
+                        {isSubmitting ? t('actions.saving') : isEditing ? t('actions.save_changes') : t('actions.add')}
                     </Button>
                     {onCancel && (
                         <Button type="button" variant="outline" onClick={() => {
-                            toast.info('تم إلغاء العملية');
+                            toast.info(t('messages.cancelled'));
                             onCancel();
                         }}>
-                            إلغاء
+                            {t('actions.cancel')}
                         </Button>
                     )}
                 </div>

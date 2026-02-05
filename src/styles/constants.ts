@@ -3,7 +3,7 @@
  * Centralized spacing and layout values
  */
 
-export const SECTION_PADDING = 'py-16 md:py-24 lg:py-32';
+export const SECTION_PADDING = 'py-16 md:py-20 ';
 export const SECTION_PADDING_SM = 'py-12 md:py-16 lg:py-20';
 export const CONTAINER = 'container mx-auto px-4 sm:px-6 lg:px-8';
 export const MAX_WIDTH_PROSE = 'max-w-3xl mx-auto';

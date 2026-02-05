@@ -19,47 +19,35 @@ This project demonstrates a **Senior-Level Feature-Based Architecture** designed
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── layout.tsx          # Root layout with providers
-│   ├── page.tsx            # Home page (composition of components)
-│   └── providers.tsx       # Client-side providers (React Query)
+│   └── [locale]/           # i18n Dynamic Routing
+│       ├── layout.tsx      # Root layout with dynamic RTL/LTR support
+│       ├── page.tsx        # Home page (composition of components)
+│       └── providers.tsx   # Client-side providers
 │
-├── features/               # 🔥 Business Domains
-│   ├── auth/               # Authentication feature
-│   │   ├── components/     # LoginForm
-│   │   ├── services/       # API calls
-│   │   ├── types/          # TypeScript types
-│   │   ├── queries.ts      # React Query hooks
-│   │   └── index.ts        # Public API
-│   │
-│   ├── users/              # Users management
+├── messages/               # Translation Assets
+│   ├── ar.json             # Arabic translations (Default)
+│   └── en.json             # English translations
+│
+├── i18n/                   # i18n Configuration
+│   ├── routing.ts          # Locale routing and Link configuration
+│   └── request.ts          # Request handler for translations
+│
+├── features/               # Business Domains
+│   ├── users/              # Users management feature
 │   │   ├── components/     # UserList, UserForm
-│   │   ├── services/       # users.service.ts
-│   │   ├── types/          # users.types.ts
-│   │   ├── queries.ts      # useUsers, useUser
-│   │   └── index.ts
+│   │   ├── services/       # API services (Mock persistence implemented)
+│   │   ├── types/          # TypeScript types
+│   │   └── queries.ts      # React Query hooks with automatic invalidation
 │   │
-│   └── bookings/           # Bookings (scaffold)
+│   └── ...                 # Other features (auth, bookings, etc.)
 │
 ├── components/             # Shared UI Components
 │   ├── ui/                 # Button, Input, Form, Label
-│   ├── layout/             # Header, Footer
+│   ├── layout/             # Header (with Language Switcher)
 │   └── home/               # Home page sections
-│       ├── HeroSection.tsx
-│       ├── ArchitectureFlow.tsx
-│       ├── KeyFeatures.tsx
-│       ├── CodeExample.tsx
-│       ├── LiveDemo.tsx
-│       ├── ProjectStructure.tsx
-│       ├── CTASection.tsx
-│       └── index.ts
 │
-├── lib/                    # Core Library Setup
-│   ├── axios.ts            # Axios instance with interceptors
-│   └── react-query.ts      # QueryClient configuration
-│
-├── utils/                  # Pure Utility Functions
-│   └── cn.ts               # className merger (clsx + tailwind-merge)
-│
+├── lib/                    # Core Library Setup (Axios, React Query)
+├── utils/                  # Pure Utility Functions (cn)
 └── types/                  # Global TypeScript Types
 ```
 

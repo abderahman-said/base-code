@@ -1,0 +1,110 @@
+{
+    "HomePage": {
+        "title": "Welcome",
+        "description": "This is a multi-language Next.js app.",
+        "hero": {
+            "badge": "Senior-Level Architecture",
+            "title": "Base Code Project",
+            "description": "Professional Next.js project demonstrating Feature-Based Architecture with React Query and TypeScript",
+            "cta_explore": "Explore Structure",
+            "cta_github": "GitHub"
+        },
+        "features": {
+            "title": "Main Features",
+            "items": {
+                "structure": {
+                    "title": "Feature-Based Structure",
+                    "description": "Every feature in a separate folder with components, hooks, services, types"
+                },
+                "ui": {
+                    "title": "Shared Components",
+                    "description": "Reusable UI components with variants and sizes"
+                },
+                "query": {
+                    "title": "React Query",
+                    "description": "Professional data management with caching and auto-refetch"
+                },
+                "ts": {
+                    "title": "TypeScript",
+                    "description": "Full type safety across the entire codebase"
+                },
+                "soc": {
+                    "title": "Separation of Concerns",
+                    "description": "Clear separation between UI, Logic, and Data"
+                },
+                "scalable": {
+                    "title": "Scalable",
+                    "description": "Easily add new features without affecting existing code"
+                }
+            }
+        },
+        "architecture": {
+            "title": "Data Flow Architecture",
+            "component": {
+                "title": "Component",
+                "description": "UI Layer"
+            },
+            "hook": {
+                "title": "Hook",
+                "description": "React Query"
+            },
+            "service": {
+                "title": "Service",
+                "description": "API Calls"
+            },
+            "api": {
+                "title": "API",
+                "description": "Backend"
+            }
+        },
+        "demo": {
+            "title": "Live Demo - Users Feature",
+            "description": "A complete live example: Service → Query → Component + React Hook Form + Zod"
+        },
+        "code_example": {
+            "title": "Practical Example"
+        },
+        "structure": {
+            "title": "Project Structure"
+        }
+    },
+    "Users": {
+        "title": "User List",
+        "loading": "Loading users...",
+        "error_loading": "An error occurred while loading data",
+        "add_user": "Add User",
+        "add_new_user": "Add New User",
+        "form_description": "Enter the new user details here. Click save when finished.",
+        "fields": {
+            "name": "Name",
+            "name_placeholder": "Enter name",
+            "email": "Email",
+            "role": "Role",
+            "role_placeholder": "Select role"
+        },
+        "roles": {
+            "user": "User",
+            "moderator": "Moderator",
+            "admin": "Admin"
+        },
+        "actions": {
+            "saving": "Saving...",
+            "save_changes": "Save Changes",
+            "add": "Add User",
+            "cancel": "Cancel"
+        },
+        "messages": {
+            "success_update": "User updated successfully",
+            "success_add": "User added successfully",
+            "error_save": "An error occurred while saving data",
+            "cancelled": "Process cancelled"
+        }
+    },
+    "Common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "documentation": "Documentation",
+        "en": "English",
+        "ar": "العربية"
+    }
+}

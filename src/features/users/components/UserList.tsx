@@ -12,19 +12,19 @@ import {
     DialogDescription,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
-import { User } from "../types/users.types";
+import { useTranslations } from 'next-intl';
 
 export function UserList() {
+    const t = useTranslations('Users');
     const { data, isLoading, isError } = useUsers();
     const [open, setOpen] = useState(false);
 
     if (isLoading) {
-        return <div className="p-8 text-center text-zinc-500">جاري تحميل المستخدمين...</div>;
+        return <div className="p-8 text-center text-zinc-500">{t('loading')}</div>;
     }
 
     if (isError) {
-        return <div className="p-8 text-center text-red-500">حدث خطأ أثناء تحميل البيانات</div>;
+        return <div className="p-8 text-center text-red-500">{t('error_loading')}</div>;
     }
 
     const handleSuccess = () => {
@@ -34,22 +34,22 @@ export function UserList() {
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-                    قائمة المستخدمين
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 ">
+                    {t('title')}
                 </h3>
 
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button>
                             <Plus className="w-4 h-4 ml-2" />
-                            إضافة مستخدم
+                            {t('add_user')}
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
-                            <DialogTitle>إضافة مستخدم جديد</DialogTitle>
+                            <DialogTitle>{t('add_new_user')}</DialogTitle>
                             <DialogDescription>
-                                قم بإدخال بيانات المستخدم الجديد هنا. اضغط حفظ عند الانتهاء.
+                                {t('form_description')}
                             </DialogDescription>
                         </DialogHeader>
 
@@ -82,7 +82,7 @@ export function UserList() {
                                     ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
                                     : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400'
                                 }`}>
-                                {user.role}
+                                {t(`roles.${user.role}` as any)}
                             </span>
                         </div>
                     </div>

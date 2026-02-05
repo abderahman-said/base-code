@@ -26,7 +26,7 @@ export function Header() {
                         asChild
                     >
                         <Link href={pathname} locale={otherLocale}>
-                            <Languages className="w-4 h-4 mr-2 ml-2" />
+                            <Languages className="w-4 h-4 me-2 ml-2" />
                             {t(otherLocale)}
                         </Link>
                     </Button>
@@ -35,7 +35,7 @@ export function Header() {
                         size="sm"
                         onClick={() => window.open('https://github.com/abderahman-said/base-code', '_blank')}
                     >
-                        <BookOpen className="w-4 h-4 mr-2 ml-2" />
+                        <BookOpen className="w-4 h-4 me-2 ml-2" />
                         {t('documentation')}
                     </Button>
                 </div>

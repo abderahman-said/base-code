@@ -26,7 +26,7 @@ export function HeroSection() {
                     size="lg"
                     onClick={() => window.scrollTo({ top: document.getElementById('architecture')?.offsetTop || 0, behavior: 'smooth' })}
                 >
-                    <Compass className="w-5 h-5 mr-2" />
+                    <Compass className="w-5 h-5 me-2" />
                     {t('cta_explore')}
                 </Button>
                 <Button
@@ -34,7 +34,7 @@ export function HeroSection() {
                     size="lg"
                     onClick={() => window.open('https://github.com/abderahman-said/base-code', '_blank')}
                 >
-                    <Github className="w-5 h-5 mr-2" />
+                    <Github className="w-5 h-5 me-2" />
                     {t('cta_github')}
                 </Button>
             </div>

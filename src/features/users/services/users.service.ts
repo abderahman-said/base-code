@@ -24,13 +24,6 @@ let mockUsers: User[] = [
         role: 'moderator',
         createdAt: '2024-03-10',
     },
-    {
-        id: '4',
-        name: 'Fatima Ibrahim',
-        email: 'fatima@example.com',
-        role: 'user',
-        createdAt: '2024-03-25',
-    },
 ];
 
 export const usersService = {

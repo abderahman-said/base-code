@@ -1,6 +1,6 @@
 'use client';
 
-import { SECTION_PADDING, HEADING_2 } from '@/styles/constants';
+import {   HEADING_2 } from '@/styles/constants';
 import { cn } from '@/utils/cn';
 import { useTranslations } from 'next-intl';
 
@@ -8,7 +8,7 @@ export function CodeExampleSection() {
   const t = useTranslations('HomePage.code_example');
 
   return (
-    <section className={SECTION_PADDING}>
+    <section  >
       <h2 className={cn(HEADING_2, 'text-black dark:text-white mb-8 text-center')}>
         {t('title')}
       </h2>

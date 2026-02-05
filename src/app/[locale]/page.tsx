@@ -42,15 +42,15 @@ export default function HomePage() {
         <FeaturesSection />
         <ArchitectureSection />
 
-        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
+        <Suspense fallback={<div className="py-20 text-center">{tCommon('loading')}</div>}>
           <CodeExampleSection />
         </Suspense>
 
-        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
+        <Suspense fallback={<div className="py-20 text-center">{tCommon('loading')}</div>}>
           <StructureSection />
         </Suspense>
 
-        <Suspense fallback={<div className="py-24 text-center">{tCommon('loading')}</div>}>
+        <Suspense fallback={<div className="pb-20 text-center">{tCommon('loading')}</div>}>
           <DemoSection />
         </Suspense>
       </main>

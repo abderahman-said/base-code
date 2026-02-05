@@ -1,7 +1,7 @@
 'use client';
 
 import { UserList } from '@/features/users';
-import { SECTION_PADDING, HEADING_2, BODY } from '@/styles/constants';
+import {   HEADING_2, BODY } from '@/styles/constants';
 import { cn } from '@/utils/cn';
 import { useTranslations } from 'next-intl';
 
@@ -9,7 +9,7 @@ export function DemoSection() {
     const t = useTranslations('HomePage.demo');
 
     return (
-        <section className={SECTION_PADDING}>
+        <section className="pb-20">
             <h2 className={cn(HEADING_2, 'text-black dark:text-white mb-8 text-center')}>
                 {t('title')}
             </h2>

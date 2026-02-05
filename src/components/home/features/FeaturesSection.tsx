@@ -1,6 +1,6 @@
 'use client';
 
-import { SECTION_PADDING, HEADING_2, GRID_3_COLS } from '@/styles/constants';
+import {   HEADING_2, GRID_3_COLS } from '@/styles/constants';
 import { cn } from '@/utils/cn';
 import { useTranslations } from 'next-intl';
 import { FolderTree, Palette, Zap, ShieldCheck, Target, Box } from 'lucide-react';
@@ -48,7 +48,7 @@ export function FeaturesSection() {
     ];
 
     return (
-        <section className={SECTION_PADDING}>
+        <section  >
             <h2 className={cn(HEADING_2, 'text-black dark:text-white mb-8 text-center')}>
                 {t('title')}
             </h2>

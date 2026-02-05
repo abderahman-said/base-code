@@ -1,21 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
+import { env } from '@/config';
 
-// Default config options
-const defaultOptions = {
-    baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api",
+// Create axios instance with default config
+export const api = axios.create({
+    baseURL: env.apiUrl,
     headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
     },
-};
+});
 
-// Create instance
-export const api = axios.create(defaultOptions);
-
-// Set the AUTH token for any request
+// Request interceptor - Add auth token
 api.interceptors.request.use(
     (config) => {
-        // You can get the token from local storage or cookies logic here
-        const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -28,7 +25,7 @@ api.interceptors.request.use(
     }
 );
 
-// Add a response interceptor
+// Response interceptor - Handle errors
 api.interceptors.response.use(
     (response) => {
         return response;
@@ -36,8 +33,11 @@ api.interceptors.response.use(
     (error) => {
         // Handle global error responses like 401 Unauthorized
         if (error.response?.status === 401) {
-            // redirect to login or clear storage
-            // if (typeof window !== "undefined") window.location.href = "/auth/login"; 
+            // Redirect to login or clear storage
+            if (typeof window !== 'undefined') {
+                localStorage.removeItem('token');
+                // window.location.href = '/login';
+            }
         }
         return Promise.reject(error);
     }

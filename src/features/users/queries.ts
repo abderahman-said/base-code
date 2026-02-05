@@ -1,16 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { usersService } from './services/users.service';
+import { usersKeys } from './keys';
 
-// Query Keys
-export const usersKeys = {
-    all: ['users'] as const,
-    lists: () => [...usersKeys.all, 'list'] as const,
-    list: (filters: string) => [...usersKeys.lists(), { filters }] as const,
-    details: () => [...usersKeys.all, 'detail'] as const,
-    detail: (id: string) => [...usersKeys.details(), id] as const,
-};
-
-// Hooks
+// Query hook for fetching all users
 export const useUsers = () => {
     return useQuery({
         queryKey: usersKeys.lists(),
@@ -18,6 +10,7 @@ export const useUsers = () => {
     });
 };
 
+// Query hook for fetching a single user by ID
 export const useUser = (id: string) => {
     return useQuery({
         queryKey: usersKeys.detail(id),

@@ -1,14 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { authService } from './services/auth.service';
-import { LoginCredentials, RegisterCredentials } from './types/auth.types';
+import type { LoginCredentials, RegisterCredentials, AuthResponse } from './types/auth.types';
+import { authKeys } from './keys';
 
-// Query Keys
-export const authKeys = {
-    all: ['auth'] as const,
-    user: () => [...authKeys.all, 'user'] as const,
-};
-
-// Hooks
+// Query hook for fetching current user
 export const useUser = () => {
     return useQuery({
         queryKey: authKeys.user(),
@@ -17,46 +12,48 @@ export const useUser = () => {
     });
 };
 
+// Mutation hook for login
 export const useLogin = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (credentials: LoginCredentials) => authService.login(credentials),
-        onSuccess: (data) => {
+        onSuccess: (data: AuthResponse) => {
             // Store token
-            if (typeof window !== 'undefined') {
-                localStorage.setItem('token', data.token);
-            }
+            localStorage.setItem('token', data.token);
             // Update user cache
             queryClient.setQueryData(authKeys.user(), data.user);
         },
     });
 };
 
+// Mutation hook for register
 export const useRegister = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: (credentials: RegisterCredentials) => authService.register(credentials),
-        onSuccess: (data) => {
-            if (typeof window !== 'undefined') {
-                localStorage.setItem('token', data.token);
-            }
+        onSuccess: (data: AuthResponse) => {
+            // Store token
+            localStorage.setItem('token', data.token);
+            // Update user cache
             queryClient.setQueryData(authKeys.user(), data.user);
         },
     });
 };
 
+// Mutation hook for logout
 export const useLogout = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
         mutationFn: authService.logout,
         onSuccess: () => {
-            if (typeof window !== 'undefined') {
-                localStorage.removeItem('token');
-            }
+            // Clear token
+            localStorage.removeItem('token');
+            // Clear user cache
             queryClient.setQueryData(authKeys.user(), null);
+            // Clear all queries
             queryClient.clear();
         },
     });

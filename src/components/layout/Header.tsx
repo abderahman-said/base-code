@@ -1,7 +1,7 @@
 'use client';
 
-import { Button } from "../ui/Button";
-import { BookOpen, LogIn } from "lucide-react";
+import { Button } from "../ui/button";
+import { BookOpen } from "lucide-react";
 
 export function Header() {
     return (
@@ -11,25 +11,14 @@ export function Header() {
                     <span className="text-black dark:text-white">Base</span>
                     <span className="text-blue-600">Code</span>
                 </div>
-
-                <nav className="flex items-center gap-4">
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => window.open('https://github.com/abderahman-said/base-code', '_blank')}
-                    >
-                        <BookOpen className="w-4 h-4 mr-2" />
-                        Documentation
-                    </Button>
-                    <Button
-                        variant="primary"
-                        size="sm"
-                        onClick={() => alert('Sign In functionality - يمكن ربطها بصفحة تسجيل الدخول')}
-                    >
-                        <LogIn className="w-4 h-4 mr-2" />
-                        Sign In
-                    </Button>
-                </nav>
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open('https://github.com/abderahman-said/base-code', '_blank')}
+                >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    Documentation
+                </Button>
             </div>
         </header>
     );

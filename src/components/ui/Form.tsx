@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from "react";
-import { useFormContext, Controller, ControllerProps, FieldPath, FieldValues } from "react-hook-form";
+import { useFormContext, Controller, ControllerProps, FieldPath, FieldValues, FormProvider } from "react-hook-form";
 import { cn } from "@/utils/cn";
 import { Label } from "./Label";
 
@@ -139,12 +139,15 @@ const FormMessage = React.forwardRef<
 });
 FormMessage.displayName = "FormMessage";
 
+const Form = FormProvider;
+
 export {
     useFormField,
-    FormField,
+    Form,
     FormItem,
     FormLabel,
     FormControl,
     FormDescription,
     FormMessage,
+    FormField,
 };

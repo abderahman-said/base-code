@@ -1,80 +1,88 @@
 'use client';
-
+import { useState } from 'react';
 import { useUsers } from '../queries';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
+import { UserForm } from './UserForm';
+import { Plus } from 'lucide-react';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogTrigger,
+import { toast } from "sonner";
+import { User } from "../types/users.types";
 
 export function UserList() {
-    const { data, isLoading, error } = useUsers();
+    const { data, isLoading, isError } = useUsers();
+    const [open, setOpen] = useState(false);
 
     if (isLoading) {
-        return (
-            <div className="flex items-center justify-center p-8">
-                <div className="text-zinc-600 dark:text-zinc-400">Loading users...</div>
-            </div>
-        );
+        return <div className="p-8 text-center text-zinc-500">جاري تحميل المستخدمين...</div>;
     }
 
-    if (error) {
-        return (
-            <div className="flex items-center justify-center p-8">
-                <div className="text-red-600 dark:text-red-400">
-                    Error loading users: {error.message}
-                </div>
-            </div>
-        );
+    if (isError) {
+        return <div className="p-8 text-center text-red-500">حدث خطأ أثناء تحميل البيانات</div>;
     }
+
+    const handleSuccess = () => {
+        setOpen(false);
+    };
 
     return (
-        <div className="w-full">
-            <div className="mb-6">
-                <h2 className="text-2xl font-bold text-black dark:text-white">Users</h2>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                    Total: {data?.total || 0} users
-                </p>
+        <div className="space-y-6">
+            <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                    قائمة المستخدمين
+                </h3>
+
+                <Dialog open={open} onOpenChange={setOpen}>
+                    <DialogTrigger asChild>
+                        <Button>
+                            <Plus className="w-4 h-4 ml-2" />
+                            إضافة مستخدم
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                            <DialogTitle>إضافة مستخدم جديد</DialogTitle>
+                            <DialogDescription>
+                                قم بإدخال بيانات المستخدم الجديد هنا. اضغط حفظ عند الانتهاء.
+                            </DialogDescription>
+                        </DialogHeader>
+
+                        <UserForm
+                            onSuccess={handleSuccess}
+                            onCancel={() => setOpen(false)}
+                        />
+                    </DialogContent>
+                </Dialog>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {data?.users.map((user) => (
                     <div
                         key={user.id}
-                        className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900"
+                        className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
                     >
-                        <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                                <h3 className="font-semibold text-black dark:text-white">
+                        <div className="mb-4 flex items-start justify-between">
+                            <div>
+                                <h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
                                     {user.name}
-                                </h3>
-                                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                                </h4>
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400">
                                     {user.email}
                                 </p>
                             </div>
-                            <span
-                                className={`rounded-full px-2 py-1 text-xs font-medium ${user.role === 'admin'
-                                    ? 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300'
-                                    : user.role === 'moderator'
-                                        ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                                        : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
-                                    }`}
-                            >
+                            <span className={`rounded-full px-2 py-1 text-xs font-medium ${user.role === 'admin'
+                                ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
+                                : user.role === 'moderator'
+                                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                                    : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400'
+                                }`}>
                                 {user.role}
                             </span>
-                        </div>
-                        <div className="mt-4 flex gap-2">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                className="flex-1"
-                                onClick={() => alert(`عرض ملف ${user.name}`)}
-                            >
-                                View Profile
-                            </Button>
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => alert(`تعديل ${user.name}`)}
-                            >
-                                Edit
-                            </Button>
                         </div>
                     </div>
                 ))}

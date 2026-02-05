@@ -31,8 +31,6 @@ export function UserForm({ user, onSubmit, onSuccess, onCancel }: UserFormProps)
 
     const handleSubmit = async (data: UserFormValues) => {
         try {
-            console.log('Form data:', data);
-
             if (isEditing) {
                 // Update implementation would go here
                 if (onSubmit) {

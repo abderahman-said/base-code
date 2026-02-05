@@ -38,14 +38,6 @@ export default function HomePage() {
     <div className="min-h-screen  bg-zinc-50 dark:bg-black">
       <Header />
       <main className='container max-w-5xl mx-auto'>
-        <div className=" py-12 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-100">
-            {t('title')}
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            {t('description')}
-          </p>
-        </div>
         <HeroSection />
         <FeaturesSection />
         <ArchitectureSection />

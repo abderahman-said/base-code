@@ -4,6 +4,7 @@ import { useUsers } from '../queries';
 import { Button } from '@/components/ui/button';
 import { UserForm } from './UserForm';
 import { Plus } from 'lucide-react';
+import { Skeleton } from '@/components/ui/Skeleton';
 import {
     Dialog,
     DialogContent,
@@ -20,7 +21,21 @@ export function UserList() {
     const [open, setOpen] = useState(false);
 
     if (isLoading) {
-        return <div className="p-8 text-center text-zinc-500">{t('loading')}</div>;
+        return (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {[...Array(3)].map((_, i) => (
+                    <div key={i} className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
+                        <div className="flex justify-between items-start">
+                            <div className="space-y-3 flex-1">
+                                <Skeleton className="h-5 w-3/4" />
+                                <Skeleton className="h-4 w-1/2" />
+                            </div>
+                            <Skeleton className="h-6 w-16 rounded-full" />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
     }
 
     if (isError) {

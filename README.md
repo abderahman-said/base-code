@@ -8,7 +8,8 @@ A React/Next.js project structure following feature-based architecture principle
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Data Fetching**: TanStack React Query v5
-- **Forms**: React Hook Form + Zod
+- **Forms**: React Hook Form + Zod (Fully integrated with UI components)
+- **Localization**: next-intl (Bilingual support Ar/En)
 - **Icons**: Lucide React
 
 ## Project Structure
@@ -58,15 +59,38 @@ export const useUsers = () => {
 ```
 
 ### Shared UI Components
-UI components in `src/components/ui/` should be stateless and generic. Use the `cn()` utility for flexible styling.
+UI components in `src/components/ui/` are generic and follow standard shadcn-like patterns. Use the `cn()` utility for flexible styling.
+
+#### Forms & Components
+- **Ready-to-use Inputs**: You don't have to build `Input` or `Select` from scratch; they’re already styled and functional.
+- **Seamless Integration**: Everything is pre-wired to work with `react-hook-form` right away.
+- **Reference Example**: Check out the `Users` feature—it’s a great example of a complete form setup with validation and dialog integration.
 
 ```tsx
-import { cn } from '@/lib/utils';
+// Example of using controlled components with react-hook-form
+<ControlledInput
+    control={form.control}
+    name="email"
+    label={t('fields.email')}
+    placeholder="example@email.com"
+    type="email"
+/>
 
-export function Button({ className, ...props }) {
-  return <button className={cn("px-4 py-2", className)} {...props} />;
-}
+<ControlledSelect
+    control={form.control}
+    name="role"
+    label={t('fields.role')}
+    placeholder={t('fields.role_placeholder')}
+    options={[
+        { value: 'user', label: t('roles.user') },
+        { value: 'moderator', label: t('roles.moderator') },
+        { value: 'admin', label: t('roles.admin') },
+    ]}
+/>
 ```
 
-## Localization
-The project uses `next-intl` for i18n. Add translations to `messages/ar.json` (default) and `messages/en.json`.
+> [!TIP]
+> **Customizable Styles**: All components are built with Tailwind CSS and `class-variance-authority`, so you can easily override or extend their styles using the `className` prop or by modifying the base component in `src/components/ui/`.
+The site is fully localized with `next-intl`, and English/Arabic support is already baked in.
+- **Integrated UI**: The language switching is already tied into the routing and components.
+- **Simple Management**: Just add your strings to `messages/ar.json` or `messages/en.json`, and you’re good to go using the `useTranslations` hook.

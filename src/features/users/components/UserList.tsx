@@ -11,6 +11,7 @@ import {
     DialogTitle,
     DialogDescription,
     DialogTrigger,
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { User } from "../types/users.types";
 

@@ -1,11 +1,11 @@
 {
     "HomePage": {
         "title": "مرحباً بكم",
-        "description": "هذا تطبيق Next.js احترافي متعدد اللغات.",
+        "description": "تطبيق Next.js متعدد اللغات.",
         "hero": {
-            "badge": "هندسة برمجية متقدمة",
+            "badge": "هيكل معتمد على الميزات",
             "title": "مشروع الكود الأساسي",
-            "description": "مشروع Next.js احترافي يوضح الـ Feature-Based Architecture مع React Query و TypeScript",
+            "description": "مشروع Next.js يوضح الـ Feature-Based Architecture مع React Query و TypeScript",
             "cta_explore": "استكشف الهيكل",
             "cta_github": "GitHub"
         },
@@ -22,7 +22,7 @@
                 },
                 "query": {
                     "title": "React Query",
-                    "description": "إدارة احترافية للبيانات مع التخزين المؤقت والتحديث التلقائي"
+                    "description": "إدارة البيانات مع التخزين المؤقت والتحديث التلقائي"
                 },
                 "ts": {
                     "title": "TypeScript",

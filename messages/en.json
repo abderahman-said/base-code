@@ -3,9 +3,9 @@
         "title": "Welcome",
         "description": "This is a multi-language Next.js app.",
         "hero": {
-            "badge": "Senior-Level Architecture",
+            "badge": "Feature-Based Architecture",
             "title": "Base Code Project",
-            "description": "Professional Next.js project demonstrating Feature-Based Architecture with React Query and TypeScript",
+            "description": "Next.js project demonstrating Feature-Based Architecture with React Query and TypeScript",
             "cta_explore": "Explore Structure",
             "cta_github": "GitHub"
         },
@@ -22,7 +22,7 @@
                 },
                 "query": {
                     "title": "React Query",
-                    "description": "Professional data management with caching and auto-refetch"
+                    "description": "Data management with caching and auto-refetch"
                 },
                 "ts": {
                     "title": "TypeScript",
